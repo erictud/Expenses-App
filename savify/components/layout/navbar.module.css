@@ -1,0 +1,57 @@
+.nav-bar {
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(45deg, var(--color-1), var(--color-2)) 1;
+}
+
+.logo-container {
+  width: 15rem;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+}
+
+.navigation svg {
+  width: 4rem;
+}
+
+.navigation svg:hover {
+  color: var(--color-1);
+  cursor: pointer;
+}
+
+.links-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.link-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.link-item svg {
+  width: 2rem;
+}
+
+.link-item a {
+  font-size: 1.7rem;
+  transition: all 0.2s;
+}
+
+.link-item a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--color-1);
+}

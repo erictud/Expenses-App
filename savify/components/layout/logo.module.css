@@ -1,0 +1,20 @@
+.logo {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.logo svg {
+  width: 4rem;
+  color: var(--color-2);
+}
+
+.logo h2,
+.logo span {
+  font-size: 2rem;
+}
+
+.logo span {
+  color: var(--color-1);
+}
