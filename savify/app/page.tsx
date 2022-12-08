@@ -1,3 +1,7 @@
 export default function Home() {
-  return <main>siiu</main>;
+  return (
+    <main>
+      <div>wow</div>
+    </main>
+  );
 }

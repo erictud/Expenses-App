@@ -23,11 +23,6 @@
   width: 4rem;
 }
 
-.navigation svg:hover {
-  color: var(--color-1);
-  cursor: pointer;
-}
-
 .links-list {
   list-style-type: none;
   display: flex;
@@ -51,7 +46,12 @@
   transition: all 0.2s;
 }
 
-.link-item a:hover {
+.link-item:hover a {
   text-decoration: underline;
   text-decoration-color: var(--color-1);
+}
+
+.link-item:hover svg {
+  color: var(--color-1);
+  cursor: pointer;
 }

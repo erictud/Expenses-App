@@ -3,21 +3,26 @@
 import styles from "./navbar.module.css";
 import Link from "next/link";
 import UserIcon from "../../icons/UserIcon";
-import Logo from "../layout/logo";
+import Logo from "./logo";
 import LoginIcon from "../../icons/LoginIcon";
 import SignupIcon from "../../icons/SignupIcon";
 import { useRecoilState } from "recoil";
 import { authState } from "../../data/authState";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
-  const { state } = useRecoilState(authState);
+  const { state } = useRecoilState(authState)[0];
+  const router = useRouter();
+
+  function logout() {
+    router.push("/auth");
+  }
+
   return (
     <div className={styles["nav-bar"]}>
-      <Link href="/">
-        <div className={styles["logo-container"]}>
-          <Logo />
-        </div>
-      </Link>
+      <div className={styles["logo-container"]}>
+        <Logo />
+      </div>
       {state ? (
         <div className={styles["navigation"]}>
           <ul className={styles["links-list"]}>
@@ -28,7 +33,9 @@ export default function Navbar() {
               <Link href="/">Aqusitions</Link>
             </li>
           </ul>
-          <UserIcon />
+          <div onClick={logout}>
+            <LoginIcon />
+          </div>
         </div>
       ) : (
         <div className={styles["navigation"]}>

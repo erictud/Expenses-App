@@ -1,11 +1,7 @@
 import { atom } from "recoil";
+import { AuthStateType } from "../types";
 
-export interface AuthStateInterface {
-  uid: string;
-  state: boolean;
-}
-
-export const authState = atom<AuthStateInterface>({
+export const authState = atom({
   key: "authState",
   default: {
     uid: "",

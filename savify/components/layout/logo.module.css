@@ -12,9 +12,14 @@
 
 .logo h2,
 .logo span {
+  font-weight: 900;
   font-size: 2rem;
 }
 
 .logo span {
   color: var(--color-1);
+}
+
+.logo:hover {
+  cursor: pointer;
 }

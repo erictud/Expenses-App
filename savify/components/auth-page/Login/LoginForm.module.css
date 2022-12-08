@@ -1,0 +1,101 @@
+.signup-form {
+  margin-top: 2rem;
+  min-height: 52rem;
+  padding: 1rem;
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);
+  border-radius: 0.5rem;
+}
+
+.signup-form p {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.signup-form p a {
+  font-size: 1.5rem;
+  color: rebeccapurple;
+}
+
+.signup-form h2 {
+  color: var(--color-1);
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 0.3rem;
+}
+
+.form {
+  margin-top: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rem;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.input-container label {
+  letter-spacing: 0.3rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.input-container input {
+  outline: none;
+  margin: 0 1rem;
+  width: calc(100% - 3rem);
+  min-width: 30rem;
+  height: 6rem;
+  font-size: 2rem;
+  border: none;
+  border-bottom: 1px solid var(--color-2);
+}
+
+.signup-form button {
+  border: none;
+  background-color: var(--color-1);
+  color: #fff;
+  width: 100%;
+  height: 4rem;
+  font-size: 2rem;
+  transition: all 0.05s;
+}
+
+.signup-form button:hover {
+  background-color: rgb(153, 81, 255, 0.9);
+  cursor: pointer;
+}
+
+.error-container {
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.error-container svg {
+  width: 2rem;
+}
+
+.error {
+  text-align: left;
+  font-size: 1.5rem;
+  color: red;
+  font-weight: 700;
+}
