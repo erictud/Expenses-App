@@ -1,9 +1,14 @@
-import { FormEvent, FormEventHandler, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
+import { useRecoilState } from "recoil";
 import ErrorIcon from "../../../icons/ErrorIcon";
 import EyeIcon from "../../../icons/EyeIcon";
 import EyeIconCut from "../../../icons/EyeIconCut";
+import Modal from "../../layout/modal";
 import Spinner from "../../layout/spinner";
+import { modalState } from "../../../data/errorModalState";
 import styles from "./SignupForm.module.css";
+import { authState } from "../../../data/authState";
+import { useRouter } from "next/navigation";
 export default function SigninForm() {
   const [firstName, setFirstName] = useState<string>();
   const [lastName, setLastName] = useState<string>();
@@ -18,6 +23,9 @@ export default function SigninForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const passwordRef = useRef<any>();
+  const [errorModalStateVal, setErrorModalStateVal] = useRecoilState(modalState);
+  const [_, setAuthStateVal] = useRecoilState(authState);
+  const router = useRouter();
 
   const changeState = () => {
     setShowPassword((prevState) => !prevState);
@@ -25,7 +33,7 @@ export default function SigninForm() {
     else passwordRef.current.type = "text";
   };
 
-  async function submitForm(ev: FormEvent<HTMLDivElement>) {
+  async function submitForm(ev: FormEvent<HTMLFormElement>) {
     ev.preventDefault();
     setLoading(true);
     if (firstName && firstName.trim().length < 3) {
@@ -63,86 +71,108 @@ export default function SigninForm() {
       },
     });
     if (!req.ok) {
+      setErrorModalStateVal("Trouble with creating an accout. Please try again later!");
       setLoading(false);
+      return;
     }
     const data = await req.json();
+    setAuthStateVal(data.uid);
+    router.push("/");
     setLoading(false);
+    setEmail("");
+    setPassword("");
+    setFirstName("");
+    setLastName("");
   }
 
+  const closeModal = (e: any) => {
+    setErrorModalStateVal("");
+  };
+
   return (
-    <div className={styles["signup-form"]} onSubmit={submitForm}>
-      <h2>Join Savify</h2>
-      <form className={styles.form}>
-        <div className={styles["input-row"]}>
+    <>
+      {errorModalStateVal && <Modal resetFunction={closeModal} value={errorModalStateVal} />}
+      <div className={styles["signup-form"]}>
+        <h2>Join Savify</h2>
+        <form className={styles.form} onSubmit={submitForm}>
+          <div className={styles["input-row"]}>
+            <div className={styles["input-container"]}>
+              <label htmlFor="firstName">First Name</label>
+              <input
+                type="text"
+                id="firstName"
+                value={firstName}
+                required
+                onChange={(e) => setFirstName(e.currentTarget.value)}
+              />
+              {firstNameHasError && (
+                <div className={styles["error-container"]}>
+                  <ErrorIcon />
+                  <span className={styles["error"]}>{firstNameHasError}</span>
+                </div>
+              )}
+            </div>
+            <div className={styles["input-container"]}>
+              <label htmlFor="secondRow">Second Name</label>
+              <input
+                type="text"
+                id="secondRow"
+                value={lastName}
+                required
+                onChange={(e) => setLastName(e.currentTarget.value)}
+              />
+              {lastNameHasError && (
+                <div className={styles["error-container"]}>
+                  <ErrorIcon />
+                  <span className={styles["error"]}>{lastNameHasError}</span>
+                </div>
+              )}
+            </div>
+          </div>
           <div className={styles["input-container"]}>
-            <label htmlFor="firstName">First Name</label>
+            <label htmlFor="email">Email</label>
             <input
-              type="text"
-              id="firstName"
-              onChange={(e) => setFirstName(e.currentTarget.value)}
+              type="email"
+              id="email"
+              value={email}
+              required
+              onChange={(e) => setEmail(e.currentTarget.value)}
             />
-            {firstNameHasError && (
+            {emailHasError && (
               <div className={styles["error-container"]}>
                 <ErrorIcon />
-                <span className={styles["error"]}>{firstNameHasError}</span>
+                <span className={styles["error"]}>{emailHasError}</span>
               </div>
             )}
           </div>
           <div className={styles["input-container"]}>
-            <label htmlFor="secondRow">Second Name</label>
-            <input
-              type="text"
-              id="secondRow"
-              onChange={(e) => setLastName(e.currentTarget.value)}
-            />
-            {lastNameHasError && (
+            <label htmlFor="password">Password</label>
+            <div className={styles.container}>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                required
+                ref={passwordRef}
+                onChange={(e) => setPassword(e.currentTarget.value)}
+              />
+              <div className={styles["svg"]} onClick={changeState}>
+                {showPassword ? <EyeIconCut /> : <EyeIcon />}
+              </div>
+            </div>
+            {passwordHasError && (
               <div className={styles["error-container"]}>
                 <ErrorIcon />
-                <span className={styles["error"]}>{lastNameHasError}</span>
+                <span className={styles["error"]}>{passwordHasError}</span>
               </div>
             )}
           </div>
-        </div>
-        <div className={styles["input-container"]}>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            required
-            onChange={(e) => setEmail(e.currentTarget.value)}
-          />
-          {emailHasError && (
-            <div className={styles["error-container"]}>
-              <ErrorIcon />
-              <span className={styles["error"]}>{emailHasError}</span>
-            </div>
-          )}
-        </div>
-        <div className={styles["input-container"]}>
-          <label htmlFor="password">Password</label>
-          <div className={styles.container}>
-            <input
-              type="password"
-              id="password"
-              ref={passwordRef}
-              onChange={(e) => setPassword(e.currentTarget.value)}
-            />
-            <div className={styles["svg"]} onClick={changeState}>
-              {showPassword ? <EyeIconCut /> : <EyeIcon />}
-            </div>
-          </div>
-          {passwordHasError && (
-            <div className={styles["error-container"]}>
-              <ErrorIcon />
-              <span className={styles["error"]}>{passwordHasError}</span>
-            </div>
-          )}
-        </div>
-        <button>{loading ? <Spinner /> : "Create account"}</button>
-      </form>
-      <p>
-        By creating an account you agree <a href="/">to this terms</a>
-      </p>
-    </div>
+          <button>{loading ? <Spinner /> : "Create account"}</button>
+        </form>
+        <p>
+          By creating an account you agree <a href="/">to this terms</a>
+        </p>
+      </div>
+    </>
   );
 }

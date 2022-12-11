@@ -4,13 +4,7 @@ import { auth, db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 type Data = {
   message: string;
-};
-
-type ReqData = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
+  uid?: string;
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
@@ -19,6 +13,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     return;
   }
   const { email, password, firstName, lastName } = req.body;
+  if (firstName && firstName.trim().length < 3) {
+    res.status(422).json({ message: "Invalid first name" });
+    return;
+  }
+  if (lastName && lastName.trim().length < 3) {
+    res.status(422).json({ message: "Invalid last name" });
+    return;
+  }
+  if (email && !email.includes("@")) {
+    res.status(422).json({ message: "Invalid email address" });
+    return;
+  }
+  if (password && password.trim().length < 8) {
+    res.status(422).json({ message: "Invalid password" });
+    return;
+  }
   const request = await createUserWithEmailAndPassword(auth, email, password);
   const uid = request.user.uid;
   const docRef = doc(db, "users", uid);
@@ -26,6 +36,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     lastName,
     firstName,
     uid,
+    aqusitions: [],
+    expenses: [],
   });
-  res.status(200).json({ message: "Access granted" });
+  res.status(200).json({ message: "Signed up succesfully", uid });
 }

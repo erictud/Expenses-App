@@ -1,20 +1,21 @@
-"use client";
-
 import styles from "./navbar.module.css";
 import Link from "next/link";
-import UserIcon from "../../icons/UserIcon";
 import Logo from "./logo";
 import LoginIcon from "../../icons/LoginIcon";
 import SignupIcon from "../../icons/SignupIcon";
 import { useRecoilState } from "recoil";
 import { authState } from "../../data/authState";
 import { useRouter } from "next/navigation";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 
 export default function Navbar() {
-  const { state } = useRecoilState(authState)[0];
+  const [uid, setUid] = useRecoilState(authState);
   const router = useRouter();
 
-  function logout() {
+  function Logout() {
+    signOut(auth);
+    setUid(null);
     router.push("/auth");
   }
 
@@ -23,7 +24,7 @@ export default function Navbar() {
       <div className={styles["logo-container"]}>
         <Logo />
       </div>
-      {state ? (
+      {uid ? (
         <div className={styles["navigation"]}>
           <ul className={styles["links-list"]}>
             <li className={styles["link-item"]}>
@@ -33,7 +34,7 @@ export default function Navbar() {
               <Link href="/">Aqusitions</Link>
             </li>
           </ul>
-          <div onClick={logout}>
+          <div onClick={Logout}>
             <LoginIcon />
           </div>
         </div>

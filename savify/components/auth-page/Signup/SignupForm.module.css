@@ -2,7 +2,6 @@
   margin-top: 2rem;
   min-height: 50rem;
   padding: 1rem;
-  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);
   border-radius: 0.5rem;
 }
 
@@ -116,4 +115,32 @@
 .svg {
   width: 4rem;
   cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .signup-form h2 {
+    text-align: center;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  .input-container input {
+    width: 30rem;
+  }
+
+  .input-row .input-container input {
+    width: 80%;
+  }
+}
+
+@media (max-width: 360px) {
+  .input-container input {
+    width: 20rem;
+  }
+
+  .svg {
+    width: 2rem;
+  }
 }
