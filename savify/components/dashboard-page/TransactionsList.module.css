@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=La+Belle+Aurore&display=swap");
+
+.container {
+  padding: 2rem 4rem;
+}
+
+.title {
+  text-align: center;
+  font-size: 3rem;
+  font-style: italic;
+  font-family: "La Belle Aurore", cursive;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  word-spacing: 0.5rem;
+  color: var(--color-2);
+}
+.transactions-list {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 1200px) {
+  .transactions-list {
+    grid-template-columns: 1fr;
+  }
+}

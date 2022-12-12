@@ -12,11 +12,11 @@ export default function ChangeButtonsRow(props: Props) {
   return (
     <div className={styles.box}>
       <div className={styles.container}>
-        <button className={`${!value && styles.active}`} onClick={updateState}>
-          Sign Up
-        </button>
         <button className={`${value && styles.active}`} onClick={updateState}>
           Sign In
+        </button>
+        <button className={`${!value && styles.active}`} onClick={updateState}>
+          Sign Up
         </button>
       </div>
     </div>

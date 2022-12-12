@@ -5,13 +5,16 @@ import LoginIcon from "../../icons/LoginIcon";
 import SignupIcon from "../../icons/SignupIcon";
 import { useRecoilState } from "recoil";
 import { authState } from "../../data/authState";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
+import ChartIconNav from "../../icons/ChartIconNav";
+import DashboardIconNav from "../../icons/DashboardIconNav";
 
 export default function Navbar() {
   const [uid, setUid] = useRecoilState(authState);
   const router = useRouter();
+  const pathname = usePathname();
 
   function Logout() {
     signOut(auth);
@@ -27,14 +30,16 @@ export default function Navbar() {
       {uid ? (
         <div className={styles["navigation"]}>
           <ul className={styles["links-list"]}>
-            <li className={styles["link-item"]}>
+            <li className={`${styles["link-item"]} ${pathname === "/" && styles.active}`}>
+              <DashboardIconNav />
               <Link href="/">Dashboard</Link>
             </li>
-            <li className={styles["link-item"]}>
-              <Link href="/">Aqusitions</Link>
+            <li className={`${styles["link-item"]} ${pathname === "/statistics" && styles.active}`}>
+              <ChartIconNav />
+              <Link href="/statistics">Statistics</Link>
             </li>
           </ul>
-          <div onClick={Logout}>
+          <div onClick={Logout} className={styles["logout"]}>
             <LoginIcon />
           </div>
         </div>

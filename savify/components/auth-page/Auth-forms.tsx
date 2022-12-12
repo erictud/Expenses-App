@@ -6,7 +6,7 @@ import LoginForm from "./Login/LoginForm";
 import SigninForm from "./Signup/SignupForm";
 
 export default function FormsAuth() {
-  const [value, setValue] = useState(false);
+  const [value, setValue] = useState(true);
 
   const updateState = () => {
     setValue((prevVal) => !prevVal);

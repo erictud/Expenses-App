@@ -73,7 +73,7 @@ export default function LoginForm() {
     <>
       {errorModalValue && <Modal resetFunction={closeModal} value={errorModalValue} />}
       <div className={styles["signup-form"]}>
-        <h2>Log in</h2>
+        <h2>Sign in</h2>
         <form className={styles.form} onSubmit={submitForm}>
           <div className={styles["input-container"]}>
             <label htmlFor="email">Email</label>

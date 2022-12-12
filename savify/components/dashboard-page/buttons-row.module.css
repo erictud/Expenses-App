@@ -1,0 +1,51 @@
+.row {
+  margin: 5rem 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.btn {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  font-size: 2rem;
+  color: var(--color-1);
+  border: none;
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1rem);
+}
+
+.svg {
+  width: 4rem;
+  color: var(--color-1);
+}
+
+.active {
+  border-bottom: 2px solid var(--color-3);
+}
+
+@media (max-width: 800px) {
+  .svg {
+    width: 2.5rem;
+  }
+
+  .btn {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .row {
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
+}

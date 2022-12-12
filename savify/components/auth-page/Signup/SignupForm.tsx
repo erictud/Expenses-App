@@ -93,7 +93,7 @@ export default function SigninForm() {
     <>
       {errorModalStateVal && <Modal resetFunction={closeModal} value={errorModalStateVal} />}
       <div className={styles["signup-form"]}>
-        <h2>Join Savify</h2>
+        <h2>Sign up</h2>
         <form className={styles.form} onSubmit={submitForm}>
           <div className={styles["input-row"]}>
             <div className={styles["input-container"]}>
@@ -170,7 +170,7 @@ export default function SigninForm() {
           <button>{loading ? <Spinner /> : "Create account"}</button>
         </form>
         <p>
-          By creating an account you agree <a href="/">to this terms</a>
+          By creating an account you agree <a href="/">to the terms and conditions</a>
         </p>
       </div>
     </>
