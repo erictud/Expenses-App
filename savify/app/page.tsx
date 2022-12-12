@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
+import AddItemButton from "../components/dashboard-page/add-item-btn";
 import ButtonsRow from "../components/dashboard-page/buttons-row";
 import TransactionsList from "../components/dashboard-page/TransactionsList";
 import { authState } from "../data/authState";
@@ -24,6 +25,7 @@ export default function Home() {
         <>
           <ButtonsRow />
           <TransactionsList />
+          <AddItemButton />
         </>
       )}
     </main>
