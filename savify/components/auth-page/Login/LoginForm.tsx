@@ -113,7 +113,9 @@ export default function LoginForm() {
               </div>
             )}
           </div>
-          <button>{loading ? <Spinner /> : "Log in"}</button>
+          <button disabled={emailValue.trim().length === 0 || passwordValue.trim().length === 0}>
+            {loading ? <Spinner /> : "Log in"}
+          </button>
         </form>
         <p>
           Fogot the password? <a href="/">Reset it</a>

@@ -78,12 +78,15 @@
   font-size: 2rem;
   transition: all 0.05s;
 }
+.signup-form button:disabled {
+  cursor: not-allowed;
+  background-color: gray;
+}
 
-.signup-form button:hover {
+.signup-form button:not(:disabled):hover {
   background-color: rgb(153, 81, 255, 0.9);
   cursor: pointer;
 }
-
 .error-container {
   padding: 0.5rem 0;
   display: flex;

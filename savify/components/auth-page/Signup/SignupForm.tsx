@@ -12,8 +12,8 @@ import { useRouter } from "next/navigation";
 export default function SigninForm() {
   const [firstName, setFirstName] = useState<string>();
   const [lastName, setLastName] = useState<string>();
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const [firstNameHasError, setFirstNameHasError] = useState<string | undefined>("");
   const [lastNameHasError, setLastNameHasError] = useState<string | undefined>("");
@@ -167,7 +167,16 @@ export default function SigninForm() {
               </div>
             )}
           </div>
-          <button>{loading ? <Spinner /> : "Create account"}</button>
+          <button
+            disabled={
+              email?.trim().length === 0 ||
+              password?.trim().length === 0 ||
+              lastName?.trim().length === 0 ||
+              firstName?.trim().length === 0
+            }
+          >
+            {loading ? <Spinner /> : "Create account"}
+          </button>
         </form>
         <p>
           By creating an account you agree <a href="/">to the terms and conditions</a>

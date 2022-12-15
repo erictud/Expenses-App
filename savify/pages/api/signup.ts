@@ -36,8 +36,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     lastName,
     firstName,
     uid,
-    aqusitions: [],
-    expenses: [],
   });
   res.status(200).json({ message: "Signed up succesfully", uid });
 }
