@@ -1,10 +1,7 @@
-import { useRouter } from "next/navigation";
-import { MouseEventHandler } from "react";
 import styles from "./modal.module.css";
 
-export default function Modal(props: { resetFunction: any; value: string }) {
-  const { resetFunction, value } = props;
-  const router = useRouter();
+export default function Modal(props: { resetFunction: any; value: string; btnVal: string }) {
+  const { resetFunction, value, btnVal } = props;
 
   return (
     <div>
@@ -12,7 +9,7 @@ export default function Modal(props: { resetFunction: any; value: string }) {
       <div className={styles["modal-container"]}>
         <h2>Error</h2>
         <p>{value}</p>
-        <button onClick={resetFunction}>Auth page</button>
+        <button onClick={resetFunction}>{btnVal}</button>
       </div>
     </div>
   );

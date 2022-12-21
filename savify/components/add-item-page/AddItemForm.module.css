@@ -147,7 +147,12 @@
   transition: all 0.05s;
 }
 
-.btn:hover {
+.btn:disabled {
+  cursor: not-allowed;
+  background-color: gray;
+}
+
+.btn:not(:disabled):hover {
   background-color: rgb(153, 81, 255, 0.9);
   cursor: pointer;
 }

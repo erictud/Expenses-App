@@ -91,7 +91,9 @@ export default function SigninForm() {
 
   return (
     <>
-      {errorModalStateVal && <Modal resetFunction={closeModal} value={errorModalStateVal} />}
+      {errorModalStateVal && (
+        <Modal btnVal="Auth page" resetFunction={closeModal} value={errorModalStateVal} />
+      )}
       <div className={styles["signup-form"]}>
         <h2>Sign up</h2>
         <form className={styles.form} onSubmit={submitForm}>

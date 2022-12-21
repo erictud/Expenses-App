@@ -23,7 +23,13 @@ export default function TransactionItem(props: Props) {
         <h5 className={styles["name"]}>{itemName}</h5>
         <h5 className={styles["date"]}>
           <CalendarIcon />
-          {date}
+          {new Date(date).toLocaleString("en", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
         </h5>
       </div>
     </div>
