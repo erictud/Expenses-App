@@ -1,8 +1,14 @@
+"use client";
+
 import styles from "./TransactionItem.module.css";
 import AmountIcon from "../../icons/AmountIcon";
 import CalendarIcon from "../../icons/CalendarIcon";
 import ExpensesItemIcon from "../../icons/ExpensesItemIcon";
 import AqusitionItemIcon from "../../icons/AqusitionItemIcon";
+import BinIcon from "../../icons/BinIcon";
+import { useRecoilState } from "recoil";
+import { authState } from "../../data/authState";
+import { loadingModalState } from "../../data/loadingModalState";
 
 interface Props {
   itemName: string;
@@ -13,6 +19,19 @@ interface Props {
 
 export default function TransactionItem(props: Props) {
   const { itemName, date, amount, type } = props;
+  const [uid, _] = useRecoilState(authState);
+  const [__, setPageLoadingState] = useRecoilState(loadingModalState);
+  async function deleteItem() {
+    setPageLoadingState(true);
+    await fetch("/api/delete-item", {
+      method: "POST",
+      body: JSON.stringify({ id: date, type, uid }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    setPageLoadingState(false);
+  }
   return (
     <div className={styles.item}>
       <div className={`${styles["svg"]} ${type === "expense" ? styles.expense : styles.aqusition}`}>
@@ -31,6 +50,9 @@ export default function TransactionItem(props: Props) {
             minute: "2-digit",
           })}
         </h5>
+      </div>
+      <div className={styles["delete-btn-container"]} onClick={deleteItem}>
+        <BinIcon />
       </div>
     </div>
   );

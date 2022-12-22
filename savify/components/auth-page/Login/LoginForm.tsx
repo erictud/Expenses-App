@@ -119,9 +119,6 @@ export default function LoginForm() {
             {loading ? <Spinner /> : "Log in"}
           </button>
         </form>
-        <p>
-          Fogot the password? <a href="/">Reset it</a>
-        </p>
       </div>
     </>
   );

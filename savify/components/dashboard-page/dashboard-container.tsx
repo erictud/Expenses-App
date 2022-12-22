@@ -4,7 +4,7 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { authState } from "../../data/authState";
-import { aqusitionsState, expensesState } from "../../data/transactionState";
+import { aqusitionsState, expensesState, transactionsState } from "../../data/transactionState";
 import { db } from "../../firebase";
 import { TransactionType } from "../../types";
 import Spinner from "../layout/spinner";
@@ -15,8 +15,9 @@ import TransactionsList from "./TransactionsList";
 export default function Container() {
   const [loading, setIsLoading] = useState(true);
   const [uid, _] = useRecoilState(authState);
-  const [__, setAqusitionsList] = useRecoilState(aqusitionsState);
-  const [___, setExpensesList] = useRecoilState(expensesState);
+  const [____, setList] = useRecoilState(transactionsState);
+  const [exList, setAqusitionsList] = useRecoilState(aqusitionsState);
+  const [aqList, setExpensesList] = useRecoilState(expensesState);
 
   useEffect(() => {
     (async function () {
@@ -48,6 +49,7 @@ export default function Container() {
         });
         setExpensesList(newArr);
       });
+
       setIsLoading(false);
     })();
   }, []);

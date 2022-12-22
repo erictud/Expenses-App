@@ -6,6 +6,6 @@ export interface AuthStateType {
 export interface TransactionType {
   name: string;
   date: string;
-  amount: string;
+  amount: number;
   type: string;
 }

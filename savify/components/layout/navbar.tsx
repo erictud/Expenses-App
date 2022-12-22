@@ -18,7 +18,7 @@ export default function Navbar() {
 
   function Logout() {
     signOut(auth);
-    setUid(null);
+    setUid("null");
     router.push("/auth");
   }
 
@@ -27,7 +27,7 @@ export default function Navbar() {
       <div className={styles["logo-container"]}>
         <Logo />
       </div>
-      {uid ? (
+      {uid !== "null" ? (
         <div className={styles["navigation"]}>
           <ul className={styles["links-list"]}>
             <li className={`${styles["link-item"]} ${pathname === "/" && styles.active}`}>

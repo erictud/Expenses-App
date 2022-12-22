@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { useRecoilState } from "recoil";
 import { authState } from "../../data/authState";
+import { loadingModalState } from "../../data/loadingModalState";
 import AqusitionsIcon from "../../icons/AqusitionsIcon";
 import ErrorIcon from "../../icons/ErrorIcon";
 import ExpensesIcon from "../../icons/ExpensesIcon";
@@ -13,6 +14,7 @@ import styles from "./AddItemForm.module.css";
 export default function AddItemForm() {
   const [hasError, setHasError] = useState(false);
   const [authStateVal, _] = useRecoilState(authState);
+  const [__, setPageLoadingState] = useRecoilState(loadingModalState);
   const [typeOfTransaction, setTypeOfTransaction] = useState(false);
   const [nameOfAqusition, setNameOfAqusition] = useState<string>("");
   const [aqusitionAmount, setAqusitionAmount] = useState<number>(0);
@@ -22,6 +24,7 @@ export default function AddItemForm() {
 
   async function submitForm(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setPageLoadingState(true);
     setIsLoading(true);
     let type;
     if (typeOfTransaction === false) type = "expense";
@@ -43,9 +46,11 @@ export default function AddItemForm() {
     if (!req.ok) {
       setHasError(true);
       setIsLoading(false);
+      setPageLoadingState(false);
       return;
     }
     setIsLoading(false);
+    setPageLoadingState(false);
     router.push("/");
   }
 
@@ -92,7 +97,7 @@ export default function AddItemForm() {
                 }}
               >
                 <AqusitionsIcon />
-                <h4>Aqusition</h4>
+                <h4>Revenue</h4>
               </div>
             </div>
           </div>
@@ -110,7 +115,7 @@ export default function AddItemForm() {
           </div>
           <button
             className={styles["btn"]}
-            disabled={nameOfAqusition.trim().length === 0 || !aqusitionAmount}
+            disabled={nameOfAqusition.trim().length === 0 || !aqusitionAmount || isLoading}
           >
             {!isLoading ? "Add item" : <Spinner />}
           </button>

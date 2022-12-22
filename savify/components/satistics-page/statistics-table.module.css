@@ -1,0 +1,50 @@
+.title {
+  font-size: 2.5rem;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-family: monospace;
+}
+
+.statistics-table {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin: 4rem 0;
+  margin-bottom: 6rem;
+}
+
+.type {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.type svg {
+  width: 7rem;
+  color: var(--color-2);
+}
+
+.info-container {
+  text-align: center;
+}
+
+.info-container p {
+  font-size: 2rem;
+}
+
+.info-container p:first-of-type {
+  font-weight: 900;
+}
+
+@media (max-width: 900px) {
+  .type svg {
+    width: 4rem;
+  }
+
+  .info-container p {
+    font-size: 1.5rem;
+  }
+}

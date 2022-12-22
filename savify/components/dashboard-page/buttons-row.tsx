@@ -37,7 +37,7 @@ export default function ButtonsRow() {
         <div className={styles["svg"]}>
           <AqusitionsIcon />
         </div>
-        Aqusitions
+        Revenue
       </button>
     </div>
   );
